@@ -56,5 +56,17 @@ function print_list(){
     <?php
     print_description();
      ?>
+     <form action="update_process.php" method="post">
+       <input type="hidden" name="pre_title" value=<?php print_title(); ?>>
+       <p>
+         <input type="text" name="title" placeholder="Title" value=<?php print_title(); ?> />
+       </p>
+       <p>
+         <textarea name="description" placeholder="Description"><?php print_description(); ?></textarea>
+       </p>
+       <p>
+         <input type="submit" />
+       </p>
+     </form>
   </body>
 </html>
