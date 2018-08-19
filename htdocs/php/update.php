@@ -46,7 +46,7 @@ function print_list(){
     <a href="create.php">create</a>
     <!-- isset() ? 있냐 없냐를 구분하는. true/false 인것 같다 -->
     <?php if(isset($_GET['id'])) {  ?>
-    <a href="update.php?id=<?=$_GET['id'] ?>">update</a>
+      <a href="update.php?id=<?=$_GET['id'] ?>">update</a>
     <?php } ?>
     <h2>
       <?php
