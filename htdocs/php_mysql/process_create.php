@@ -1,8 +1,9 @@
 <?php
+require_once('lib/errorDP.php');
+require_once('lib/dbConn.php');
 //root 사용자권한은 위험
-$conn = mysqli_connect('localhost','','','');
 
-$create_sql = "INSERT INTO ***
+$create_sql = "INSERT INTO {$tableName}
                 (title, description, created)
                 VALUES(
                   '{$_POST['title']}',
