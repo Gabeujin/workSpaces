@@ -6,3 +6,4 @@ htdocs/bitnami.css
 htdocs/favicon.ico
 htdocs/img/
 htdocs/index.html
+dbConn.php
