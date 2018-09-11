@@ -15,7 +15,7 @@ if(($result->num_rows) > 0){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <title>WEB</title>
