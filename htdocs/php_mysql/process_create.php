@@ -4,7 +4,7 @@ require_once('lib/dbConn.php');
 
 //escaping
 $filtered = array(
-  'title' => mysqli_real_escape_string($conn,$_POST['title']),
+  'title'       => mysqli_real_escape_string($conn,$_POST['title']),
   'description' => mysqli_real_escape_string($conn,$_POST['description'])
 );
 
