@@ -56,9 +56,10 @@ if(isset($_GET['id'])){
     <a href="create.php">create</a>
     <?=$modify_link ?>
     <form action="process_modify.php" method="POST">
+      <input type="hidden" name="id" value=<?=$filtered['id'] ?> />
       <p><input type="text" name="title" placeholder="타이틀" value=<?=$article['title'] ?> /></p>
       <p><textarea name="description" placeholder="내용"><?=$article['description'] ?></textarea></p>
-      <p><input type="submit" value="MODIFY"/></p>
+      <p><input type="submit" value="MODIFY" /></p>
     </form>
   </body>
 </html>
