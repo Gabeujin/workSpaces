@@ -8,7 +8,6 @@ $select_sql = "SELECT id,title,description FROM {$use_table} LIMIT 10";
 $result     = mysqli_query($conn, $select_sql);
 
 //initialization
-$page_css_class = "modify";
 $list = '';
 $modify_link = '';
 $article = array(
@@ -22,7 +21,9 @@ if($result != NULL){
   while($row = mysqli_fetch_array($result)){
     $esc_title  = htmlspecialchars($row['title']);
     $esc_id     = htmlspecialchars($row['id']);
-    $list       = $list."<a class=\"modify\" href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
+    $now_page = '';
+    if(isset($_GET['id']))$now_page = $esc_id === $_GET['id'] ? 'class="bold_text"' : '';
+    $list       = $list."<a {$now_page} href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
   }
 }else{
   $list = 'EMPTY DATA!!';
@@ -39,6 +40,7 @@ if(isset($_GET['id'])){
   $article['title']       = htmlspecialchars($row['title']);
   $article['description'] = htmlspecialchars($row['description']);
   $modify_link            = '<a class="bold_text" href="modify.php?id='.$filtered['id'].'">modify</a>';
+  $delete_link            = '<a class="red_point" href="delete.php?id='.$filtered['id'].'">delete</a>';
 };
 ?>
 <!DOCTYPE html>
@@ -55,6 +57,7 @@ if(isset($_GET['id'])){
     </ol>
     <a href="create.php">create</a>
     <?=$modify_link ?>
+    <?=$delete_link ?>
     <form action="process_modify.php" method="POST">
       <input type="hidden" name="id" value=<?=$filtered['id'] ?> />
       <p><input type="text" name="title" placeholder="타이틀" value=<?=$article['title'] ?> /></p>

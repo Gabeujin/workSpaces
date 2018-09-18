@@ -23,6 +23,8 @@ if($result != NULL){
   while($row = mysqli_fetch_array($result)){
     $esc_title  = htmlspecialchars($row['title']);
     $esc_id     = htmlspecialchars($row['id']);
+    $now_page = '';
+    if(isset($_GET['id']))$now_page = $esc_id === $_GET['id'] ? 'class="bold_text"' : '';
     $list       = $list."<a href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
   }
 }else{
