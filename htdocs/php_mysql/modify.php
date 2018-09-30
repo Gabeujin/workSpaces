@@ -10,6 +10,7 @@ $result     = mysqli_query($conn, $select_sql);
 //initialization
 $list = '';
 $modify_link = '';
+$delete_link = '';
 $article = array(
   'title'       => 'Welcome!',
   'description' => 'Lorem ipsum dolor sit amet, laborum.'
@@ -40,15 +41,20 @@ if(isset($_GET['id'])){
   $article['title']       = htmlspecialchars($row['title']);
   $article['description'] = htmlspecialchars($row['description']);
   $modify_link            = '<a class="bold_text" href="modify.php?id='.$filtered['id'].'">modify</a>';
-  $delete_link            = '<a class="red_point" href="delete.php?id='.$filtered['id'].'">delete</a>';
+  $delete_link            = '
+  <form action="process_delete.php" method="post">
+      <input type="hidden" name="id" value='.$filtered['id'].'" />
+      <input class="red_point" type="submit" value="delete" />
+  </from>
+  ';
 };
 ?>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>WEB</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
     <h1><a href="index.php">WEB</a></h1>

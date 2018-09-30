@@ -3,7 +3,7 @@ require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 
 //타입지정
-// settype($_POST['id'],'integer');
+settype($_POST['id'],'integer');
 //escaping
 $filtered = array(
   'id'          => mysqli_real_escape_string($conn,$_POST['id']),

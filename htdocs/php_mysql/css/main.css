@@ -9,3 +9,11 @@
 a{
   text-decoration: none;
 }
+
+ol{
+  width : fit-content;
+}
+
+ol>a>li:hover{
+  font-weight : 900;
+}

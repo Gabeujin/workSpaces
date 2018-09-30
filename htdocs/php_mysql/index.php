@@ -41,7 +41,12 @@ if(isset($_GET['id'])){
   $article['title']       = htmlspecialchars($row['title']);
   $article['description'] = htmlspecialchars($row['description']);
   $modify_link            = '<a href="modify.php?id='.$filtered['id'].'">modify</a>';
-  $delete_link            = '<a class="red_point" href="delete.php?id='.$filtered['id'].'">delete</a>';
+  $delete_link            = '
+  <form action="process_delete.php" method="post">
+      <input type="hidden" name="id" value='.$filtered['id'].'" />
+      <input class="red_point" type="submit" value="delete" />
+  </from>
+  ';
 };
 ?>
 <!DOCTYPE html>
