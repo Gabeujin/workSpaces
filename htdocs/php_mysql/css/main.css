@@ -1,0 +1,19 @@
+.bold_text{
+  font-weight : 900;
+}
+
+.red_point{
+  color : red;
+}
+
+a{
+  text-decoration: none;
+}
+
+ol{
+  width : fit-content;
+}
+
+ol>a>li:hover{
+  font-weight : 900;
+}

@@ -1,13 +1,18 @@
 <?php
 require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//root 사용자권한은 위험
+
+//escaping
+$filtered = array(
+  'title'       => mysqli_real_escape_string($conn,$_POST['title']),
+  'description' => mysqli_real_escape_string($conn,$_POST['description'])
+);
 
 $create_sql = "INSERT INTO {$tableName}
                 (title, description, created)
                 VALUES(
-                  '{$_POST['title']}',
-                  '{$_POST['description']}',
+                  '{$filtered['title']}',
+                  '{$filtered['description']}',
                   NOW()
                 )";
 
