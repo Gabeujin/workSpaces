@@ -4,7 +4,9 @@ require_once('lib/dbConn.php');
 //DB connection
 //escape table name
 $use_table  = mysqli_real_escape_string($conn, $tableName);
-$select_sql = "SELECT id,title,description FROM {$use_table} LIMIT 10";
+$select_sql = " SELECT id,title,description
+                FROM {$use_table}
+                LIMIT 10";
 $result     = mysqli_query($conn, $select_sql);
 
 //initialization

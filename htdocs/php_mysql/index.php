@@ -3,18 +3,24 @@ require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 //DB connection
 //escape table name
-$use_table  = mysqli_real_escape_string($conn, $tableName);
-$select_sql = "SELECT id,title,description FROM {$use_table} LIMIT 10";
-$result     = mysqli_query($conn, $select_sql);
+$use_table    = mysqli_real_escape_string($conn, $tableName);
+$join_table   = mysqli_real_escape_string($conn, $joinTable);
+$select_sql   = " SELECT id,title,description
+                  FROM {$use_table}
+                  LIMIT 10";
+$result       = mysqli_query($conn, $select_sql);
 
 //initialization
-$list = '';
-$modify_link = '';
-$delete_link = '';
-$article = array(
+$list         = '';
+$modify_link  = '';
+$delete_link  = '';
+$article      = array(
   'title'       => 'Welcome!',
-  'description' => 'Lorem ipsum dolor sit amet, laborum.'
+  'description' => 'Lorem ipsum dolor sit amet, laborum.',
+  'name'        => '???',
+  'profile'     => '???'
 );
+$author       = '';
 
 //결과값이 있을 때
 if($result != NULL){
@@ -33,13 +39,21 @@ if($result != NULL){
 //escaping
 if(isset($_GET['id'])){
   $filtered = array(
-    'id' => mysqli_real_escape_string($conn, $_GET['id']),
+    'id' => mysqli_real_escape_string($conn, $_GET['id'])
   );
-  $sql    = "SELECT id,title,description FROM {$use_table} WHERE id={$filtered['id']}";
+  $sql    = " SELECT {$use_table}.id,title,description,{$join_table}.name,{$join_table}.profile
+              FROM {$use_table}
+                LEFT JOIN {$join_table}
+                  ON {$use_table}.author_id = {$join_table}.id 
+              WHERE {$use_table}.id={$filtered['id']}";
   $result = mysqli_query($conn, $sql);
   $row    = mysqli_fetch_array($result);
+
   $article['title']       = htmlspecialchars($row['title']);
   $article['description'] = htmlspecialchars($row['description']);
+  $article['name']        = htmlspecialchars($row['name']);
+  $article['profile']     = htmlspecialchars($row['profile']);
+
   $modify_link            = '<a href="modify.php?id='.$filtered['id'].'">modify</a>';
   $delete_link            = '
   <form action="process_delete.php" method="post">
@@ -47,6 +61,8 @@ if(isset($_GET['id'])){
       <input class="red_point" type="submit" value="delete" />
   </from>
   ';
+
+  $author = '<p>by <i>'.$article['name'].'</i>, '.$article['profile'].'</p>';
 };
 ?>
 <!DOCTYPE html>
@@ -66,5 +82,6 @@ if(isset($_GET['id'])){
     <?=$delete_link ?>
     <h2><?=$article['title']?></h2>
     <?=$article['description']?>
+    <?=$author?>
   </body>
 </html>
