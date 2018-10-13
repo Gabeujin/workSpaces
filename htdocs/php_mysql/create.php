@@ -4,17 +4,15 @@ require_once('lib/dbConn.php');
 //DB connection
 //escape table name
 $use_table  = mysqli_real_escape_string($conn, $tableName);
-$select_sql = "SELECT id,title,description FROM {$use_table} LIMIT 10";
+$select_sql = " SELECT id,title,description
+                FROM {$use_table}
+                LIMIT 10";
 $result     = mysqli_query($conn, $select_sql);
 
 //initialization
 
-$list = '';
-$modify_link = '';
-$article = array(
-  'title'       => 'Welcome!',
-  'description' => 'Lorem ipsum dolor sit amet, laborum.'
-);
+$list         = '';
+$modify_link  = '';
 
 //결과값이 있을 때
 if($result != NULL){
@@ -23,13 +21,27 @@ if($result != NULL){
   while($row = mysqli_fetch_array($result)){
     $esc_title  = htmlspecialchars($row['title']);
     $esc_id     = htmlspecialchars($row['id']);
-    $now_page = '';
+    $now_page   = '';
     if(isset($_GET['id']))$now_page = $esc_id === $_GET['id'] ? 'class="bold_text"' : '';
     $list       = $list."<a href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
   }
 }else{
   $list = 'EMPTY DATA!!';
 };
+
+//저자 리스트 출력
+$select_sql   = " SELECT id,name
+                  FROM author
+                  LIMIT 10";
+$result       = mysqli_query($conn,$select_sql);
+$select_form  = '<select name="author_id">';
+while($row = mysqli_fetch_array($result)){
+  $esc_name       = htmlspecialchars($row['name']);
+  $esc_author_id  = htmlspecialchars($row['id']);
+
+  $select_form .= '<option value="'.$esc_author_id.'">'.$esc_name.'</option>';
+}
+$select_form .= '</select>';
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,6 +59,7 @@ if($result != NULL){
     <form action="process_create.php" method="POST">
       <p><input type="text" name="title" placeholder="타이틀"/></p>
       <p><textarea name="description" placeholder="내용"></textarea></p>
+      <p><?=$select_form ?></p>
       <p><input type="submit" value="CREATE"/></p>
     </form>
   </body>

@@ -2,7 +2,9 @@
 require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 
-$create_sql = "SELECT title,description FROM {$tableName} LIMIT 10";
+$create_sql = " SELECT title,description
+                FROM {$tableName}
+                LIMIT 10";
 
 // 1 row(단일 행)
 $result = mysqli_query($conn, $create_sql);
@@ -12,7 +14,9 @@ print_r("<p>".$row['description']."</p>");
 print_r("<hr/>");
 
 // ALL row(다중 행)
-$create_sql = "SELECT title,description FROM {$tableName} LIMIT 10";
+$create_sql = " SELECT title,description
+                FROM {$tableName}
+                LIMIT 10";
 $result = mysqli_query($conn, $create_sql);
 
 //PHP 에서 NULL과 FALSE는 같다
