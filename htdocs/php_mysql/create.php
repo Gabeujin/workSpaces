@@ -13,6 +13,7 @@ $result     = mysqli_query($conn, $select_sql);
 
 $list         = '';
 $modify_link  = '';
+$bold_text    = '';
 
 //결과값이 있을 때
 if($result != NULL){
