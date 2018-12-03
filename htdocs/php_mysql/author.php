@@ -45,9 +45,11 @@ $list = '';
         }
         ?>
       </tbody>
-      <tfoot>
-
-      </tfoot>
     </table>
+    <form action="process_create_author.php" method="post">
+      <p><input type="text" name="name" placeholder="name"></p>
+      <p><textarea name="profile" rows="4" cols="30" placeholder="profile"></textarea></p>
+      <p><input type="submit" value="create author"></p>
+    </form>
   </body>
 </html>
