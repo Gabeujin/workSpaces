@@ -44,7 +44,7 @@ if(isset($_GET['id'])){
   $sql    = " SELECT {$use_table}.id,title,description,{$join_table}.name,{$join_table}.profile
               FROM {$use_table}
                 LEFT JOIN {$join_table}
-                  ON {$use_table}.author_id = {$join_table}.id 
+                  ON {$use_table}.author_id = {$join_table}.id
               WHERE {$use_table}.id={$filtered['id']}";
   $result = mysqli_query($conn, $sql);
   $row    = mysqli_fetch_array($result);
@@ -74,6 +74,7 @@ if(isset($_GET['id'])){
   </head>
   <body>
     <h1><a href="index.php">WEB</a></h1>
+    <p><a href="author.php">author</a></p>
     <ol>
       <?=$list?>
     </ol>

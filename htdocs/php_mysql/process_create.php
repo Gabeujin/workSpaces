@@ -17,7 +17,6 @@ $create_sql = "INSERT INTO {$tableName}
                   NOW(),
                   '{$filtered['author_id']}'
                 )";
-
 $result = mysqli_query($conn, $create_sql);
 if($result != true) {
     echo "CREATE 중 오류가 발생했습니다. 관리자에게 문의해주세요.";
