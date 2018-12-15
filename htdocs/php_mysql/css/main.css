@@ -1,3 +1,4 @@
+/*강조 관련*/
 .bold_text{
   font-weight : 900;
 }
@@ -5,7 +6,7 @@
 .red_point{
   color : red;
 }
-
+/*-----------------*/
 a{
   text-decoration: none;
 }
@@ -25,3 +26,24 @@ table,tr,td{
 thead{
   background-color : #bbbbbb;
 }
+/*배치 및 특성, 속성 관련*/
+.m_zero{
+  margin : 0;
+}
+.p_zero{
+  padding : 0;
+}
+
+.align_center{
+  display : table;
+  margin  : 0 auto;
+}
+
+.fit_contents{
+  width : 100%;
+}
+
+.display_IB{
+  display : inline-block;
+}
+/*-----------------*/

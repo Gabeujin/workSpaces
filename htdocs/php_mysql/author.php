@@ -23,6 +23,7 @@ $list = '';
           <td>id</td>
           <td>name</td>
           <td>profile</td>
+          <td>update</td>
         </tr>
       </thead>
       <tbody>
@@ -40,16 +41,27 @@ $list = '';
           <td><?=$filtered['id'] ?></td>
           <td><?=$filtered['name'] ?></td>
           <td><?=$filtered['profile'] ?></td>
+          <td><button class="align_center fit_contents p_zero"><a href="author.php?id=<?=$filtered['id'] ?>" class="display_IB fit_contents">U</a></button></td>
         </tr>
         <?php
         }
         ?>
       </tbody>
+    <?php
+    if(isset($_GET['id'])){
+      $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
+      settype($filtered_id, 'integer');
+      $select_sql = "SELECT * FROM author WHERE id = {$filtered_id}";
+      $result = mysqli_query($conn, $select_sql);
+      $row = mysqli_fetch_array($result);
+    }
+    ?>
     </table>
     <form action="process_create_author.php" method="post">
       <p><input type="text" name="name" placeholder="name"></p>
       <p><textarea name="profile" rows="4" cols="30" placeholder="profile"></textarea></p>
       <p><input type="submit" value="create author"></p>
     </form>
+  <script type="text/javascript" src="js/click.js"></script>
   </body>
 </html>
