@@ -4,7 +4,7 @@ let getParameter = function(i){
   let parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
   parameters.forEach(function(index){
     let param = index.split('=')[0];
-    if(param.toUpperCase() == i.toUpperCase()){returnValue = index.split('=')[1]}
+    if(param.toUpperCase() == i.toUpperCase())returnValue = index.split('=')[1];
   });
   return decodeURIComponent(returnValue);
 };
