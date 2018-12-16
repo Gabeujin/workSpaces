@@ -12,7 +12,7 @@ $list = '';
   <head>
     <meta charset="utf-8">
     <title>WEB</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
   </head>
   <body>
     <h1><a href="index.php">WEB</a></h1>
@@ -48,18 +48,24 @@ $list = '';
         ?>
       </tbody>
     <?php
+    $escaped = array(
+      'name'    => '',
+      'profile' => ''
+    );
     if(isset($_GET['id'])){
       $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
       settype($filtered_id, 'integer');
-      $select_sql = "SELECT * FROM author WHERE id = {$filtered_id}";
+      $select_sql = "SELECT * FROM {$join_table} WHERE id = {$filtered_id}";
       $result = mysqli_query($conn, $select_sql);
       $row = mysqli_fetch_array($result);
+      $escaped['name']    = htmlspecialchars($row['name']);
+      $escaped['profile'] = htmlspecialchars($row['profile']);
     }
     ?>
     </table>
     <form action="process_create_author.php" method="post">
-      <p><input type="text" name="name" placeholder="name"></p>
-      <p><textarea name="profile" rows="4" cols="30" placeholder="profile"></textarea></p>
+      <p><input type="text" name="name" placeholder="name" value="<?=$escaped['name'] ?>"></p>
+      <p><textarea name="profile" rows="4" cols="30" placeholder="profile"><?=$escaped['profile'] ?></textarea></p>
       <p><input type="submit" value="create author"></p>
     </form>
   <script type="text/javascript" src="js/click.js"></script>
