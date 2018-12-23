@@ -52,6 +52,8 @@ $list = '';
       'name'    => '',
       'profile' => ''
     );
+    $submit_value     = 'create author';
+    $action_location  = 'process_create_author.php';
     if(isset($_GET['id'])){
       $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
       settype($filtered_id, 'integer');
@@ -60,13 +62,15 @@ $list = '';
       $row = mysqli_fetch_array($result);
       $escaped['name']    = htmlspecialchars($row['name']);
       $escaped['profile'] = htmlspecialchars($row['profile']);
+      $submit_value       = 'update author';
+      $action_location    = 'process_modify_author.php?id='.$filtered_id;
     }
     ?>
     </table>
-    <form action="process_create_author.php" method="post">
+    <form action="<?=$action_location ?>" method="post">
       <p><input type="text" name="name" placeholder="name" value="<?=$escaped['name'] ?>"></p>
       <p><textarea name="profile" rows="4" cols="30" placeholder="profile"><?=$escaped['profile'] ?></textarea></p>
-      <p><input type="submit" value="create author"></p>
+      <p><input type="submit" value="<?=$submit_value ?>"></p>
     </form>
   <script type="text/javascript" src="js/click.js"></script>
   </body>
