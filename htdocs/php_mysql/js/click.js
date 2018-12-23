@@ -1,6 +1,5 @@
 let getParameter = function(i){
-  let returnValue;
-  let target = null;
+  let returnValue,target;
   let url = location.href;
   let parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
   parameters.forEach(function(index){
@@ -12,6 +11,8 @@ let getParameter = function(i){
 
 let getParam = getParameter('id') ? getParameter('id') : null;
 if(getParam != null){
-  let target = document.querySelector("a[href='author.php?id="+getParam+"']");
-  target.style.backgroundColor = 'white';
+  target = document.querySelector("a[href='author.php?id="+getParam+"']");
+  if(target != null){
+    target.style.backgroundColor = 'white';
+    }
 };

@@ -4,26 +4,26 @@ require_once('lib/dbConn.php');
 
 //타입지정
 settype($_POST['id'],'integer');
+$join_table = mysqli_real_escape_string($conn, $joinTable);
 //escaping
 $filtered = array(
-  'id'          => mysqli_real_escape_string($conn,$_POST['id']),
-  'title'       => mysqli_real_escape_string($conn,$_POST['title']),
-  'description' => mysqli_real_escape_string($conn,$_POST['description'])
+  'id'       => mysqli_real_escape_string($conn,$_POST['id']),
+  'name'     => mysqli_real_escape_string($conn,$_POST['name']),
+  'profile'  => mysqli_real_escape_string($conn,$_POST['profile'])
 );
-echo $filtered;
-$update_sql = "UPDATE {$tableName}
+$update_sql = "UPDATE {$join_table}
                 SET
-                  title       = '{$filtered['title']}',
-                  description = '{$filtered['description']}'
+                  name       = '{$filtered['name']}',
+                  profile    = '{$filtered['profile']}'
                 WHERE
-                  id          = '{$filtered['id']}'
+                  id         = '{$filtered['id']}'
                 ";
-
+                
 $result = mysqli_query($conn, $update_sql);
 if($result != true) {
     error_log(mysqli_error($conn));
     echo "UPDATE 중 오류가 발생했습니다. 관리자에게 문의해주세요.";
   }else{
-    echo "<h3>성공했습니다.</h3><a href='index.php'>홈으로</a>";
+    header('Location:author.php?id='.$filtered['id']);
   }
  ?>

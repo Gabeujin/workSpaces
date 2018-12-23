@@ -3,12 +3,14 @@ require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 
 //escaping
+$join_table = mysqli_real_escape_string($conn, $joinTable);
+
 $filtered = array(
   'name'       => mysqli_real_escape_string($conn,$_POST['name']),
   'profile'    => mysqli_real_escape_string($conn,$_POST['profile'])
 );
 
-$create_sql = "INSERT INTO {$joinTable}
+$create_sql = "INSERT INTO {$join_table}
               (name,profile)
               VALUES(
                 '{$filtered['name']}',
@@ -20,7 +22,7 @@ if($result != true) {
     echo "CREATE 중 오류가 발생했습니다. 관리자에게 문의해주세요.";
     echo "<script>console.log(`".mysqli_error($conn)."`)</script>";
   }else{
-    header('Location: author.php');
+    header('Location:author.php');
     //redirection
   }
  ?>

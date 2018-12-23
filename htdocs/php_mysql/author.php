@@ -24,6 +24,7 @@ $list = '';
           <td>name</td>
           <td>profile</td>
           <td>update</td>
+          <td>delete</td>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +43,10 @@ $list = '';
           <td><?=$filtered['name'] ?></td>
           <td><?=$filtered['profile'] ?></td>
           <td><button class="align_center fit_contents p_zero"><a href="author.php?id=<?=$filtered['id'] ?>" class="display_IB fit_contents">U</a></button></td>
+          <form action="process_delete_author.php" method="post">
+            <td><button class="align_center fit_contents p_zero red_point" type="submit">D</button></td>
+            <input type="hidden" value="<?=$filtered['id'] ?>" name="id"/>
+          </form>
         </tr>
         <?php
         }
@@ -54,6 +59,7 @@ $list = '';
     );
     $submit_value     = 'create author';
     $action_location  = 'process_create_author.php';
+    $id_box           = '';
     if(isset($_GET['id'])){
       $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
       settype($filtered_id, 'integer');
@@ -63,7 +69,8 @@ $list = '';
       $escaped['name']    = htmlspecialchars($row['name']);
       $escaped['profile'] = htmlspecialchars($row['profile']);
       $submit_value       = 'update author';
-      $action_location    = 'process_modify_author.php?id='.$filtered_id;
+      $action_location    = 'process_modify_author.php';
+      $id_box             = '<input type="hidden" value='.$filtered_id.' name="id" />';
     }
     ?>
     </table>
@@ -71,7 +78,8 @@ $list = '';
       <p><input type="text" name="name" placeholder="name" value="<?=$escaped['name'] ?>"></p>
       <p><textarea name="profile" rows="4" cols="30" placeholder="profile"><?=$escaped['profile'] ?></textarea></p>
       <p><input type="submit" value="<?=$submit_value ?>"></p>
+      <?=$id_box ?>
     </form>
-  <script type="text/javascript" src="js/click.js"></script>
+    <script type="text/javascript" src="js/click.js"></script>
   </body>
 </html>
