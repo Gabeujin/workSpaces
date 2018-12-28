@@ -43,15 +43,25 @@ $list = '';
           <td><?=$filtered['name'] ?></td>
           <td><?=$filtered['profile'] ?></td>
           <td><button class="align_center fit_contents p_zero"><a href="author.php?id=<?=$filtered['id'] ?>" class="display_IB fit_contents">U</a></button></td>
-          <form action="process_delete_author.php" method="post">
+          <form action="process_delete_author.php" class="deleteBtn" method="post">
             <td><button class="align_center fit_contents p_zero red_point" type="submit">D</button></td>
-            <input type="hidden" value="<?=$filtered['id'] ?>" name="id"/>
+            <input type="hidden" value="<?=$filtered['id'] ?>" name="id" label="hiddenId"/>
           </form>
         </tr>
         <?php
         }
         ?>
       </tbody>
+      <script type="text/javascript">
+        let deleteBtn = document.querySelectorAll('.deleteBtn');
+        deleteBtn.forEach(function(item){
+          item.addEventListener('submit',function(){
+            if(!confirm('정말 삭제할까요?')){
+              return false;
+            }
+          });
+        });
+      </script>
     <?php
     $escaped = array(
       'name'    => '',
@@ -75,8 +85,8 @@ $list = '';
     ?>
     </table>
     <form action="<?=$action_location ?>" method="post">
-      <p><input type="text" name="name" placeholder="name" value="<?=$escaped['name'] ?>"></p>
-      <p><textarea name="profile" rows="4" cols="30" placeholder="profile"><?=$escaped['profile'] ?></textarea></p>
+      <p><input type="text" name="name" placeholder="name" label="input_name" value="<?=$escaped['name'] ?>"></p>
+      <p><textarea name="profile" rows="4" cols="30" placeholder="profile" label="input_profile"><?=$escaped['profile'] ?></textarea></p>
       <p><input type="submit" value="<?=$submit_value ?>"></p>
       <?=$id_box ?>
     </form>
