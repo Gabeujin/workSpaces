@@ -43,7 +43,7 @@ $list = '';
           <td><?=$filtered['name'] ?></td>
           <td><?=$filtered['profile'] ?></td>
           <td><button class="align_center fit_contents p_zero"><a href="author.php?id=<?=$filtered['id'] ?>" class="display_IB fit_contents">U</a></button></td>
-          <form action="process_delete_author.php" class="deleteBtn" method="post">
+          <form method="post" class="deleteForm" action="process_delete_author.php">
             <td><button class="align_center fit_contents p_zero red_point" type="submit">D</button></td>
             <input type="hidden" value="<?=$filtered['id'] ?>" name="id" label="hiddenId"/>
           </form>
@@ -52,16 +52,7 @@ $list = '';
         }
         ?>
       </tbody>
-      <script type="text/javascript">
-        let deleteBtn = document.querySelectorAll('.deleteBtn');
-        deleteBtn.forEach(function(item){
-          item.addEventListener('submit',function(){
-            if(!confirm('정말 삭제할까요?')){
-              return false;
-            }
-          });
-        });
-      </script>
+
     <?php
     $escaped = array(
       'name'    => '',
@@ -71,11 +62,11 @@ $list = '';
     $action_location  = 'process_create_author.php';
     $id_box           = '';
     if(isset($_GET['id'])){
-      $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
+      $filtered_id        = mysqli_real_escape_string($conn, $_GET['id']);
       settype($filtered_id, 'integer');
-      $select_sql = "SELECT * FROM {$join_table} WHERE id = {$filtered_id}";
-      $result = mysqli_query($conn, $select_sql);
-      $row = mysqli_fetch_array($result);
+      $select_sql         = "SELECT * FROM {$join_table} WHERE id = {$filtered_id}";
+      $result       = mysqli_query($conn, $select_sql);
+      $row          = mysqli_fetch_array($result);
       $escaped['name']    = htmlspecialchars($row['name']);
       $escaped['profile'] = htmlspecialchars($row['profile']);
       $submit_value       = 'update author';
@@ -91,5 +82,6 @@ $list = '';
       <?=$id_box ?>
     </form>
     <script type="text/javascript" src="js/click.js"></script>
+    <script type="text/javascript" src="js/deleteForm.js"></script>
   </body>
 </html>
