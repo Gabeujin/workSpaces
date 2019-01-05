@@ -5,13 +5,14 @@ require_once('lib/dbConn.php');
 //타입지정
 settype($_POST['id'],'integer');
 //escaping
+$use_table = mysqli_real_escape_string($conn, $tableName);
 $filtered = array(
   'id'          => mysqli_real_escape_string($conn,$_POST['id']),
   'title'       => mysqli_real_escape_string($conn,$_POST['title']),
   'description' => mysqli_real_escape_string($conn,$_POST['description'])
 );
 
-$update_sql = "UPDATE {$tableName}
+$update_sql = "UPDATE {$use_table}
                 SET
                   title       = '{$filtered['title']}',
                   description = '{$filtered['description']}'
