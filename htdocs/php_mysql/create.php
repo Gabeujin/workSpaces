@@ -1,12 +1,11 @@
 <?php
 // require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
+require_once('lib/nowPage.php');
 //escape table name
 $use_table  = mysqli_real_escape_string($conn, $tableName);
-$select_sql = " SELECT id,title,description
-                FROM {$use_table}
-                LIMIT 10";
+$join_table = mysqli_real_escape_string($conn, $joinTable);
+$select_sql = " SELECT id,title,description FROM ".$use_table." LIMIT 10";
 $result     = mysqli_query($conn, $select_sql);
 
 $list         = '';
@@ -15,13 +14,11 @@ $bold_text    = '';
 
 //결과값이 있을 때
 if($result != NULL){
-  $bold_text = "class=\"bold_text\"";
+  $bold_text = 'class="bold_text"';
   // 다중행 가져오기
   while($row = mysqli_fetch_array($result)){
     $esc_title  = htmlspecialchars($row['title']);
     $esc_id     = htmlspecialchars($row['id']);
-    $now_page   = '';
-    if(isset($_GET['id']))$now_page = $esc_id === $_GET['id'] ? 'class="bold_text"' : '';
     $list       = $list."<a href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
   }
 }else{
@@ -29,9 +26,7 @@ if($result != NULL){
 };
 
 //저자 리스트 출력
-$select_sql   = " SELECT id,name
-                  FROM author
-                  LIMIT 10";
+$select_sql   = " SELECT id,name FROM ".$join_table." LIMIT 10";
 $result       = mysqli_query($conn,$select_sql);
 $select_form  = '<select name="author_id">';
 while($row = mysqli_fetch_array($result)){
@@ -50,7 +45,8 @@ $select_form .= '</select>';
     <title>WEB</title>
   </head>
   <body>
-    <h1><a href="index.php">WEB</a></h1>
+    <h1><a href="index.php">WEB</a><span><?=$nowTopic?></span></h1>
+    <p><a href="author.php">author</a></p>
     <ol>
       <?=$list?>
     </ol>

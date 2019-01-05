@@ -1,7 +1,7 @@
 <?php
 // require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
+require_once('lib/nowPage.php');
 //escape table name
 $use_table  = mysqli_real_escape_string($conn, $tableName);
 $select_sql = " SELECT id,title,description
@@ -59,7 +59,8 @@ if(isset($_GET['id'])){
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
-    <h1><a href="index.php">WEB</a></h1>
+    <h1><a href="index.php">WEB</a><span><?=$nowTopic?></span></h1>
+    <p><a href="author.php">author</a></p>
     <ol>
       <?=$list?>
     </ol>
