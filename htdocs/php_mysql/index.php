@@ -1,7 +1,6 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
 //escape table name
 $use_table    = mysqli_real_escape_string($conn, $tableName);
 $join_table   = mysqli_real_escape_string($conn, $joinTable);
@@ -10,7 +9,6 @@ $select_sql   = " SELECT id,title,description
                   LIMIT 10";
 $result       = mysqli_query($conn, $select_sql);
 
-//initialization
 $list         = '';
 $modify_link  = '';
 $delete_link  = '';
@@ -22,7 +20,6 @@ $article      = array(
 );
 $author       = '';
 
-//결과값이 있을 때
 if($result != NULL){
   // 다중행 가져오기
   while($row = mysqli_fetch_array($result)){
@@ -36,7 +33,6 @@ if($result != NULL){
   $list = 'EMPTY DATA!!';
 };
 
-//escaping
 if(isset($_GET['id'])){
   $filtered = array(
     'id' => mysqli_real_escape_string($conn, $_GET['id'])

@@ -1,5 +1,5 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 //DB connection
 //escape table name
@@ -47,7 +47,7 @@ if(isset($_GET['id'])){
   <form action="process_delete.php" method="post">
       <input type="hidden" name="id" value='.$filtered['id'].'" />
       <input class="red_point" type="submit" value="delete" />
-  </from>
+  </form>
   ';
 };
 ?>
@@ -69,7 +69,7 @@ if(isset($_GET['id'])){
     <form action="process_modify.php" method="POST">
       <input type="hidden" name="id" value=<?=$filtered['id'] ?> />
       <p><input type="text" name="title" placeholder="타이틀" value=<?=$article['title'] ?> /></p>
-      <p><textarea name="description" placeholder="내용"><?=$article['description'] ?></textarea></p>
+      <p><textarea name="description" placeholder="내용" rows="5"><?=$article['description'] ?></textarea></p>
       <p><input type="submit" value="MODIFY" /></p>
     </form>
   </body>

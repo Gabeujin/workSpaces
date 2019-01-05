@@ -1,5 +1,5 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 //DB connection
 //escape table name
@@ -8,8 +8,6 @@ $select_sql = " SELECT id,title,description
                 FROM {$use_table}
                 LIMIT 10";
 $result     = mysqli_query($conn, $select_sql);
-
-//initialization
 
 $list         = '';
 $modify_link  = '';
@@ -59,7 +57,7 @@ $select_form .= '</select>';
     <a <?=$bold_text ?> href="create.php">create</a>
     <form action="process_create.php" method="POST">
       <p><input type="text" name="title" placeholder="타이틀"/></p>
-      <p><textarea name="description" placeholder="내용"></textarea></p>
+      <p><textarea name="description" placeholder="내용" rows="5"></textarea></p>
       <p><?=$select_form ?></p>
       <p><input type="submit" value="CREATE"/></p>
     </form>

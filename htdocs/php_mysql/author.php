@@ -1,7 +1,7 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
+
 //escape table name
 $use_table    = mysqli_real_escape_string($conn, $tableName);
 $join_table   = mysqli_real_escape_string($conn, $joinTable);
