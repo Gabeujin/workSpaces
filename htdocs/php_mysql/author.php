@@ -1,7 +1,8 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
+require_once('lib/nowPage.php');
+
 //escape table name
 $use_table    = mysqli_real_escape_string($conn, $tableName);
 $join_table   = mysqli_real_escape_string($conn, $joinTable);
@@ -15,7 +16,7 @@ $list = '';
     <link rel="stylesheet" type="text/css" href="./css/main.css">
   </head>
   <body>
-    <h1><a href="index.php">WEB</a></h1>
+    <h1><a href="index.php">WEB</a><span><?=$nowTopic?></span></h1>
     <p><a href="index.php">topic</a></p>
     <table>
       <thead>
@@ -29,7 +30,7 @@ $list = '';
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT id,name,profile FROM {$join_table}";
+        $sql = "SELECT id,name,profile FROM ".$join_table;
         $result = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($result)){
           $filtered = array(
@@ -64,7 +65,7 @@ $list = '';
     if(isset($_GET['id'])){
       $filtered_id        = mysqli_real_escape_string($conn, $_GET['id']);
       settype($filtered_id, 'integer');
-      $select_sql         = "SELECT * FROM {$join_table} WHERE id = {$filtered_id}";
+      $select_sql         = "SELECT * FROM ".$join_table." WHERE id = ".$filtered_id;
       $result       = mysqli_query($conn, $select_sql);
       $row          = mysqli_fetch_array($result);
       $escaped['name']    = htmlspecialchars($row['name']);

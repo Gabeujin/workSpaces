@@ -6,17 +6,31 @@
 .red_point{
   color : red;
 }
-/*-----------------*/
-a{
-  text-decoration: none;
+
+body>a:hover{
+  font-weight : 900;
 }
 
-ol{
-  width : fit-content;
+body>p>a:hover{
+  font-weight : 900;
 }
 
 ol>a>li:hover{
   font-weight : 900;
+}
+
+body button{
+  cursor: pointer;
+}
+
+/*스타일 관련*/
+body>h1>span{
+  font-size : small;
+  cursor : default;
+}
+
+a{
+  text-decoration: none;
 }
 
 table,tr,td{
@@ -27,9 +41,14 @@ thead{
   background-color : #bbbbbb;
 }
 /*배치 및 특성, 속성 관련*/
+ol{
+  width : fit-content;
+}
+
 .m_zero{
   margin : 0;
 }
+
 .p_zero{
   padding : 0;
 }

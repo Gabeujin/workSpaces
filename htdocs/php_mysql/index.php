@@ -1,16 +1,13 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
-//DB connection
+require_once('lib/nowPage.php');
 //escape table name
 $use_table    = mysqli_real_escape_string($conn, $tableName);
 $join_table   = mysqli_real_escape_string($conn, $joinTable);
-$select_sql   = " SELECT id,title,description
-                  FROM {$use_table}
-                  LIMIT 10";
+$select_sql   = "SELECT id,title,description FROM ".$use_table." LIMIT 10";
 $result       = mysqli_query($conn, $select_sql);
 
-//initialization
 $list         = '';
 $modify_link  = '';
 $delete_link  = '';
@@ -22,7 +19,6 @@ $article      = array(
 );
 $author       = '';
 
-//결과값이 있을 때
 if($result != NULL){
   // 다중행 가져오기
   while($row = mysqli_fetch_array($result)){
@@ -30,22 +26,21 @@ if($result != NULL){
     $esc_id     = htmlspecialchars($row['id']);
     $now_page = '';
     if(isset($_GET['id']))$now_page = $esc_id === $_GET['id'] ? 'class="bold_text"' : '';
-    $list       = $list."<a {$now_page} href=\"index.php?id={$esc_id}\"><li>{$esc_title}</li></a>";
+    $list       = $list."<a ".$now_page." href=\"index.php?id=".$esc_id."\"><li>".$esc_title."</li></a>";
   }
 }else{
   $list = 'EMPTY DATA!!';
 };
 
-//escaping
 if(isset($_GET['id'])){
   $filtered = array(
     'id' => mysqli_real_escape_string($conn, $_GET['id'])
   );
-  $sql    = " SELECT {$use_table}.id,title,description,{$join_table}.name,{$join_table}.profile
-              FROM {$use_table}
-                LEFT JOIN {$join_table}
-                  ON {$use_table}.author_id = {$join_table}.id
-              WHERE {$use_table}.id={$filtered['id']}";
+  $sql    = " SELECT ".$use_table.".id,title,description,".$join_table.".name,".$join_table.".profile
+              FROM ".$use_table."
+                LEFT JOIN ".$join_table."
+                  ON ".$use_table.".author_id = ".$join_table.".id
+              WHERE ".$use_table.".id=".$filtered['id'];
   $result = mysqli_query($conn, $sql);
   $row    = mysqli_fetch_array($result);
 
@@ -73,7 +68,7 @@ if(isset($_GET['id'])){
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
-    <h1><a href="index.php">WEB</a></h1>
+    <h1><a href="index.php">WEB</a><span><?=$nowTopic?></span></h1>
     <p><a href="author.php">author</a></p>
     <ol>
       <?=$list?>

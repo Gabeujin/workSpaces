@@ -1,5 +1,5 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 
 //타입지정
@@ -18,11 +18,11 @@ $update_sql = "UPDATE {$join_table}
                 WHERE
                   id         = '{$filtered['id']}'
                 ";
-                
+
 $result = mysqli_query($conn, $update_sql);
 if($result != true) {
-    error_log(mysqli_error($conn));
-    echo "UPDATE 중 오류가 발생했습니다. 관리자에게 문의해주세요.";
+    // error_log(mysqli_error($conn));
+    print("UPDATE 중 오류가 발생했습니다. 관리자에게 문의해주세요.");
   }else{
     header('Location:author.php?id='.$filtered['id']);
   }

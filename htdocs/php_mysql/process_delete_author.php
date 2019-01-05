@@ -1,5 +1,5 @@
 <?php
-require_once('lib/errorDP.php');
+// require_once('lib/errorDP.php');
 require_once('lib/dbConn.php');
 
 //타입지정
@@ -24,8 +24,8 @@ $delete_sql = "DELETE
 $result = mysqli_query($conn, $delete_sql);
 
 if($result != true) {
-    error_log(mysqli_error($conn));
-    echo "DELETE 중 오류가 발생했습니다. 관리자에게 문의해주세요.";
+    // error_log(mysqli_error($conn));
+    print("DELETE 중 오류가 발생했습니다. 관리자에게 문의해주세요.");
   }else{
     header('Location:author.php');
   }
