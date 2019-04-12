@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>객체 리터럴</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let p1 = {
+        x : 300,
+        y : 280
+      };
+      let p2 = {
+        x : 350,
+        y : 200
+      };
+
+      let rect = {
+        leftTop     : p1,
+        rightBottom : p2,
+        size        : function(){
+          return (this.rightBottom.x-this.leftTop.x) * (this.leftTop.y-this.rightBottom.y)
+        }
+      };
+
+      console.dir(p1);
+      console.dir(p2);
+      console.log(rect.size());
+    </script>
+
+  </body>
+</html>
