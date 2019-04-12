@@ -1,11 +1,7 @@
 Bitnami/
-*.exe
-htdocs/503.html
-htdocs/applications.html
-htdocs/bitnami.css
-htdocs/favicon.ico
-htdocs/img/
-htdocs/index.html
-dbConn.php
 VisualStudio/
 Github/
+posix/
+nodejs/
+htdocs/
+*.exe
